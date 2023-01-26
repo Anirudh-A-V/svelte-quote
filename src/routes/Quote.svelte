@@ -83,9 +83,9 @@
         background-color: var(--color-bg-2);
     }
 
-    .btn svg {
+    /* .btn svg {
         width: 1.5rem;
         height: 1.5rem;
         margin-right: 0.5rem;
-    }
+    } */
 </style>
