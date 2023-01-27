@@ -2,13 +2,24 @@
     import { onMount } from 'svelte';
 	import Tags from './Tags.svelte';
 
+    import { selectedTag } from './store.js';
+
     let quote = '';
     let author = '';
 
-    const getQuote = async () => {
-        const response = await fetch('https://api.quotable.io/random');
-        const data = await response.json();
+    let tag = '';
+    // const URL = selectedTag == 'all' ? 'https://api.quotable.io/random' : `https://api.quotable.io/random?tag=${selectedTag}`
+    let URL = 'https://api.quotable.io/random';
+    selectedTag.subscribe((value) => {
+        tag = value;
+    });
 
+    $: URL = tag == 'all' ? 'https://api.quotable.io/random' : `https://api.quotable.io/random?tags=${tag}`;
+
+    const getQuote = async () => {
+        const response = await fetch(URL);
+        const data = await response.json();
+        console.log(URL);
         quote = data.content
         console.log(data);
         author = data.author;
